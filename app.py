@@ -4,8 +4,8 @@ import streamlit as st
 GRAMS_PER_LB = 453.59237
 FILE = "D6_Specs_Database.xlsx"
 
-st.set_page_config(page_title="Plastic + PCR Calculator", page_icon="♻️")
-st.title("♻️ Plastic + PCR Calculator")
+st.set_page_config(page_title="Nicole's Super Awesome Calculator", page_icon="♻️")
+st.title("♻️ Nicole's Super Awesome Calculator")
 
 @st.cache_data
 def load_data():

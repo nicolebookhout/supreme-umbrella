@@ -1,0 +1,30 @@
+DB_PATH = "D6_Specs_Database.sqlite"
+
+st.title("Plastic Usage Calculator")
+
+part = st.text_input("Vendor Part Number")
+units = st.number_input("Units purchased per year", min_value=0.0, step=1000.0)
+
+if part:
+    with sqlite3.connect(DB_PATH) as conn:
+        df = pd.read_sql_query(
+            "SELECT vendor_part_number, item_description, gram_weight "
+            "FROM d6_specs WHERE vendor_part_number = ?",
+            conn,
+            params=(part.strip(),)
+        )
+
+    if df.empty:
+        st.error("Part number not found.")
+    else:
+        row = df.iloc[0]
+        gram_weight = float(row["gram_weight"])
+        grams_per_year = units * gram_weight
+        kg_per_year = grams_per_year / 1000
+        metric_tons_per_year = grams_per_year / 1_000_000
+
+        st.subheader(row["item_description"])
+        st.write(f"Gram weight: **{gram_weight:,.2f} g/unit**")
+        st.write(f"Plastic used per year: **{grams_per_year:,.0f} g**")
+        st.write(f"= **{kg_per_year:,.2f} kg**")
+        st.write(f"= **{metric_tons_per_year:,.4f} metric tons**")

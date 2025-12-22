@@ -55,9 +55,9 @@ co2e_saved_metric_tons = co2e_saved_kg / 1000
 
 miles_equivalent = co2e_saved_metric_tons / MTCO2E_PER_MILE
 
-        st.subheader("Results")
-        st.metric("Plastic used (lbs)", f"{plastic_lbs:,.2f}")
-        st.metric("PCR used (lbs)", f"{pcr_lbs:,.2f}")
+st.subheader("Results")
+st.metric("Plastic used (lbs)", f"{plastic_lbs:,.2f}")
+st.metric("PCR used (lbs)", f"{pcr_lbs:,.2f}")
 st.subheader("PCR Impact")
 
 st.metric("Pounds of PCR used", f"{pcr_lbs:,.1f} lb")

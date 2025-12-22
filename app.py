@@ -60,7 +60,7 @@ st.metric("Plastic used (lbs)", f"{plastic_lbs:,.2f}")
 st.metric("PCR used (lbs)", f"{pcr_lbs:,.2f}")
 st.subheader("PCR Impact")
 
-st.metric("Pounds of PCR used", f"{pcr_lbs:,.1f} lb")
+
 st.metric("Estimated CO₂e avoided", f"{co2e_saved_metric_tons:,.3f} metric tons")
 st.metric("Equivalent gasoline miles avoided", f"{miles_equivalent:,.0f} miles")
 

@@ -32,47 +32,44 @@ if part and units:
         pcr_lbs = plastic_lbs * (pcr_pct / 100)
 
         # =========================
-        # Impact comparison: miles driven equivalent
+        # Impact comparison: CO2e avoided
         # =========================
         KG_PER_LB = 0.45359237
-        DEFAULT_CO2E_SAVED_KG_PER_KG_RPET = 1.70  # editable assumption
-        MTCO2E_PER_MILE = 3.93e-4  # EPA gasoline passenger vehicle
 
-        with st.sidebar:
-            st.subheader("Impact assumptions")
-            co2e_saved_kg_per_kg = st.number_input(
-                "kg CO₂e avoided per kg rPET (vs virgin PET)",
-                min_value=0.0,
-                value=DEFAULT_CO2E_SAVED_KG_PER_KG_RPET,
-                step=0.05
-            )
+with st.sidebar:
+    st.subheader("Gigaton assumptions")
+    co2e_saved_kg_per_kg = st.number_input(
+        "kg CO₂e avoided per kg PCR (vs virgin)",
+        min_value=0.0,
+        value=1.70,   # TEMP placeholder until you replace with Walmart/Gigaton factor(s)
+        step=0.05
+    )
 
-        co2e_saved_kg_per_lb = co2e_saved_kg_per_kg * KG_PER_LB
-        co2e_saved_kg = pcr_lbs * co2e_saved_kg_per_lb
-        co2e_saved_metric_tons = co2e_saved_kg / 1000
-        miles_equivalent = co2e_saved_metric_tons / MTCO2E_PER_MILE
+pcr_kg = pcr_lbs * KG_PER_LB
+co2e_avoided_kg = pcr_kg * co2e_saved_kg_per_kg
+co2e_avoided_metric_tons = co2e_avoided_kg / 1000.0
+        
 
-        st.subheader("Results")
-        st.metric("Plastic used (lbs)", f"{plastic_lbs:,.2f}")
-        st.metric("PCR used (lbs)", f"{pcr_lbs:,.2f}")
+        st.subheader("PCR Impact (Project Gigaton)")
+        st.metric("Estimated CO₂e emissions avoided", f"{co2e_avoided_metric_tons:,.3f} metric tons CO₂e")
+        
 
         st.subheader("PCR Impact")
         st.metric("Estimated CO₂e avoided", f"{co2e_saved_metric_tons:,.3f} metric tons")
-        st.metric("Equivalent gasoline miles avoided", f"{miles_equivalent:,.0f} miles")
+        
 
-        with st.popover("Methodology"):
-            st.markdown("""
-**How this is calculated**
-- PCR used (lb) = total plastic (lb) × PCR content %
-- CO₂e avoided = PCR used × CO₂e savings per lb rPET
+        with st.popover("Methodology (Project Gigaton)"):
+    st.markdown("""
+This calculator estimates **CO₂e emissions avoided** from PCR content using:
 
-**Assumptions**
-- Virgin PET ≈ 2.15 kg CO₂e/kg
-- rPET ≈ 0.45 kg CO₂e/kg
-- Difference = **1.70 kg CO₂e/kg rPET** (adjustable)
+**CO₂e avoided (kg) = PCR mass (kg) × (EF_virgin − EF_PCR)**
 
-**EPA equivalency**
-- Gasoline passenger vehicle: **3.93×10⁻4 metric tons CO₂e per mile**
+Where the emissions factor difference is set using the assumption in the sidebar.
+For Project Gigaton reporting, use the same emissions factor approach and boundaries
+described in Walmart’s Project Gigaton Accounting Methodology.
+
+- Walmart Project Gigaton Accounting Methodology (PDF): https://www.walmartsustainabilityhub.com/content/dam/walmart-sustainability-hub/documents/project-gigaton/project-gigaton-accounting-methodology.pdf
+""")
 
 **Disclaimer**
 Results are estimates. Actual impacts vary by resin source, PCR process,

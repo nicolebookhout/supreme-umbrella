@@ -1,4 +1,4 @@
-DB_PATH = "CSGG.sqlite"
+DB_PATH = "D6_Specs_Database.sqlite"
 
 st.title("Plastic Usage Calculator")
 

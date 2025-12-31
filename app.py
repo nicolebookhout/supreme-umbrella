@@ -1,7 +1,7 @@
 import pandas as pd
 import streamlit as st
 
-FILE_PATH = "D6_Specs_Database.xlsx"
+FILE_PATH = "CSGG.xlsx"
 GRAMS_PER_POUND = 453.59237
 
 st.set_page_config(page_title="Plastic + PCR Calculator", page_icon="♻️", layout="centered")

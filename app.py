@@ -7,7 +7,7 @@ import streamlit as st
 GRAMS_PER_LB = 453.59237
 KG_PER_LB = 0.45359237
 
-FILE = "D6_Specs_Database.xlsx"
+FILE = "CSGG.xlsx"
 
 # Default placeholder until you replace with your Walmart/Gigaton-approved factor
 DEFAULT_CO2E_AVOIDED_KG_PER_KG_PCR = 1.70  # kg CO2e avoided per kg PCR vs virgin
